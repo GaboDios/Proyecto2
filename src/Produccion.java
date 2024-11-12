@@ -1,4 +1,8 @@
-public class Produccion implements TipoDePersonal {
+public class Produccion extends BaseTipoDePersonal {
+
+    public Produccion(String nombre, String identificador, double sueldo, String equipo) {
+        super(nombre, identificador, sueldo, equipo);
+    }
 
     @Override
     public void crearNombre(int index) {

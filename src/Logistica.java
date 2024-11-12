@@ -1,5 +1,9 @@
 public class Logistica extends BaseTipoDePersonal {
 
+    public Logistica(String nombre, String identificador, double sueldo, String equipo) {
+        super(nombre, identificador, sueldo, equipo);
+    }
+
     @Override
     public void crearNombre(int index) {
         System.out.println("Creando nombre " + index + " para personal de Logística.");

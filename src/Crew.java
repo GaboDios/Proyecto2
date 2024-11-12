@@ -1,5 +1,9 @@
 public class Crew extends BaseTipoDePersonal {
 
+    public Crew(String nombre, String identificador, double sueldo, String equipo) {
+        super(nombre, identificador, sueldo, equipo);
+    }
+
     @Override
     public void crearNombre(int index) {
         System.out.println("Creando nombre para el miembro del crew con índice: " + index);

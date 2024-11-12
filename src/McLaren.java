@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class McLaren {
     private String nombre;
     private String identificador;
@@ -5,12 +8,31 @@ public class McLaren {
     private double kilometraje;
     private StateMcLaren estadoActual;
 
+    // Nueva lista para almacenar los equipos
+    private List<Equipo> equipos;
+
     public McLaren(String nombre, String identificador, double costo, double kilometraje) {
         this.nombre = nombre;
         this.identificador = identificador;
         this.costo = costo;
         this.kilometraje = kilometraje;
         this.estadoActual = new EnInventario(this); // Estado inicial
+        this.equipos = new ArrayList<>();
+    }
+
+    // Método para agregar un equipo a McLaren
+    public void agregarEquipo(Equipo equipo) {
+        equipos.add(equipo);
+    }
+
+    // Método para calcular el costo total de nómina de todos los equipos
+    public double calcularCostoTotalNomina() {
+        double costoTotal = 0;
+        for (Equipo equipo : equipos) {
+            costoTotal += equipo.calcularCostoNomina();
+        }
+        System.out.println("Costo total de nómina para todos los equipos: $" + costoTotal);
+        return costoTotal;
     }
 
     // Métodos de cambio de estado

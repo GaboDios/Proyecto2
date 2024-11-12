@@ -1,32 +1,35 @@
-public class Ejecutivos extends TiposPersonal {
-
-    @Override
-    public void saldo() {
-        System.out.println("Calculando saldo para Ejecutivos.");
+public class Ejecutivos extends BaseTipoDePersonal {
+    public Ejecutivos(String nombre, String identificador, double sueldo, String equipo) {
+        super(nombre, identificador, sueldo, equipo);
     }
 
     @Override
-    public void numeroDePatrocinios() {
-        System.out.println("Calculando número de patrocinios para Ejecutivos.");
+    public void crearNombre(int index) {
+        System.out.println("Creando nombre " + index + " para personal de Producción.");
     }
 
     @Override
-    public void totalDeGastosPersonal() {
-        System.out.println("Calculando gastos de personal para Ejecutivos.");
+    public void crearIdentificador(int index) {
+        System.out.println("Creando identificador " + index + " para personal de Producción.");
     }
 
     @Override
-    public void totalDeGastosMcLaren() {
-        System.out.println("Calculando gastos de McLaren para Ejecutivos.");
+    public void crearUsuario(int index) {
+        System.out.println("Creando usuario " + index + " para personal de Producción.");
     }
 
     @Override
-    public void datosDePatrocinio() {
-        System.out.println("Calculando datos de patrocinio para Ejecutivos.");
+    public void crearSueldo(int index) {
+        System.out.println("Creando sueldo " + index + " para personal de Producción.");
     }
 
     @Override
-    public void marketing() {
-        System.out.println("Calculando marketing para Ejecutivos.");
+    public void crearGPU(int index) {
+        System.out.println("Creando GPU " + index + " para personal de Producción.");
+    }
+
+    @Override
+    public void crearMotherboard(int index) {
+        System.out.println("Creando motherboard " + index + " para personal de Producción.");
     }
 }

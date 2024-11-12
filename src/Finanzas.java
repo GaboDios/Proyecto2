@@ -1,32 +1,26 @@
 public class Finanzas extends BaseTipoDePersonal {
 
+    public Finanzas(String nombre, String identificador, double sueldo, String equipo) {
+        super(nombre, identificador, sueldo, equipo);
+    }
+
     @Override
     public void crearNombre(int index) {
-        System.out.println("Creando nombre " + index + " para personal de Finanzas.");
+        System.out.println("Nombre del personal de Finanzas: " + nombre + " con índice: " + index);
     }
 
     @Override
     public void crearIdentificador(int index) {
-        System.out.println("Creando identificador " + index + " para personal de Finanzas.");
+        System.out.println("Identificador del personal de Finanzas: " + identificador + " con índice: " + index);
     }
 
     @Override
     public void crearUsuario(int index) {
-        System.out.println("Creando usuario " + index + " para personal de Finanzas.");
+        System.out.println("Creando usuario para el personal de Finanzas en el equipo: " + equipo);
     }
 
     @Override
     public void crearSueldo(int index) {
-        System.out.println("Creando sueldo " + index + " para personal de Finanzas.");
-    }
-
-    @Override
-    public void crearGPU(int index) {
-        System.out.println("Creando GPU " + index + " para personal de Finanzas.");
-    }
-
-    @Override
-    public void crearMotherboard(int index) {
-        System.out.println("Creando motherboard " + index + " para personal de Finanzas.");
+        System.out.println("Estableciendo sueldo para el personal de Finanzas: $" + sueldo);
     }
 }
