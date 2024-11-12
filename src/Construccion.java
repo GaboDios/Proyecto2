@@ -1,4 +1,4 @@
-public class Construccion implements TipoDePersonal {
+public class Construccion extends BaseTipoDePersonal {
 
     @Override
     public void crearNombre(int index) {

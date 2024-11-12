@@ -1,4 +1,4 @@
-public class Calidad implements TipoDePersonal {
+public class Calidad extends BaseTipoDePersonal {
 
     @Override
     public void crearNombre(int index) {

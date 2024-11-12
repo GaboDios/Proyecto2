@@ -1,4 +1,4 @@
-public class Logistica implements TipoDePersonal {
+public class Logistica extends BaseTipoDePersonal {
 
     @Override
     public void crearNombre(int index) {

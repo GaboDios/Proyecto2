@@ -1,4 +1,4 @@
-public class Finanzas implements TipoDePersonal {
+public class Finanzas extends BaseTipoDePersonal {
 
     @Override
     public void crearNombre(int index) {
