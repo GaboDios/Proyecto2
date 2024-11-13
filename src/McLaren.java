@@ -75,7 +75,6 @@ public class McLaren {
             contrato.crearFechaDePago(random.nextInt(30)); // Fecha de pago aleatoria en el primer mes
 
             patrocinadores.add(patrocinador);
-            System.out.println("Patrocinador inicializado: " + nombrePatrocinador);
         }
     }
 
@@ -107,7 +106,6 @@ public class McLaren {
     public void agregarEquipo(Equipo equipo) {
         if (!equipos.contains(equipo)) {
             equipos.add(equipo);
-            System.out.println("Equipo " + equipo.getNombre() + " agregado a McLaren.");
         } else {
             System.out.println("El equipo " + equipo.getNombre() + " ya está registrado.");
         }
@@ -116,7 +114,6 @@ public class McLaren {
     // Método para agregar usuarios
     public void agregarUsuario(Usuario usuario) {
         usuarios.add(usuario);
-        System.out.println("Usuario " + usuario.getNombre() + " agregado.");
     }
 
     // Método para verificar login de un usuario

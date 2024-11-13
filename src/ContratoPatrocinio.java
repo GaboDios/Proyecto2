@@ -1,75 +1,156 @@
+/**
+ * Clase que representa un contrato de patrocinio, implementando la interfaz Contratos.
+ * Incluye detalles como firma, identificación fiscal, duración, lugar de trabajo,
+ * remuneración y fechas relacionadas.
+ */
 import java.time.LocalDate;
 
 public class ContratoPatrocinio implements Contratos {
+
+    /**
+     * Firma asociada al contrato.
+     */
     private String firma;
+
+    /**
+     * Autorización vinculada al contrato.
+     */
     private String autorizacion;
+
+    /**
+     * Identificación fiscal de la entidad patrocinadora.
+     */
     private String identificacionFiscal;
-    private int duracionMeses; // Duración en meses
+
+    /**
+     * Duración del contrato en meses.
+     */
+    private int duracionMeses;
+
+    /**
+     * Fecha de comienzo del contrato.
+     */
     private LocalDate fechaComienzo;
+
+    /**
+     * Fecha de expiración del contrato.
+     */
     private LocalDate fechaExpiracion;
+
+    /**
+     * Lugar de trabajo especificado en el contrato.
+     */
     private String lugarDeTrabajo;
-    private double remuneracion; // Monto del patrocinio
+
+    /**
+     * Remuneración o monto del patrocinio.
+     */
+    private double remuneracion;
+
+    /**
+     * Fecha de pago del patrocinio.
+     */
     private LocalDate fechaDePago;
 
+    /**
+     * Constructor vacío para inicialización manual de los atributos si es necesario.
+     */
     public ContratoPatrocinio() {
-        // Constructor vacío para inicialización manual si es necesario
+        // Constructor por defecto
     }
 
+    /**
+     * Genera una firma identificativa para el contrato.
+     *
+     * @param index Índice utilizado para diferenciar firmas.
+     */
     @Override
     public void crearFirma(int index) {
         this.firma = "Firma #" + index;
-        System.out.println("Firma creada: " + this.firma);
     }
 
+    /**
+     * Genera una autorización para el contrato.
+     *
+     * @param index Índice utilizado para diferenciar autorizaciones.
+     */
     @Override
     public void crearAutorizacion(int index) {
         this.autorizacion = "Autorización #" + index;
-        System.out.println("Autorización creada: " + this.autorizacion);
     }
 
+    /**
+     * Genera una identificación fiscal para el contrato.
+     *
+     * @param index Índice utilizado para diferenciar identificaciones fiscales.
+     */
     @Override
     public void crearIdentificacionFiscal(int index) {
         this.identificacionFiscal = "ID Fiscal #" + index;
-        System.out.println("Identificación fiscal creada: " + this.identificacionFiscal);
     }
 
+    /**
+     * Establece la duración del contrato en meses.
+     *
+     * @param index Índice utilizado para definir la duración.
+     */
     @Override
     public void crearDuracionDeContrato(int index) {
         this.duracionMeses = index;
-        System.out.println("Duración del contrato creada: " + this.duracionMeses + " meses");
     }
 
+    /**
+     * Establece la fecha de comienzo del contrato basándose en el índice.
+     *
+     * @param index Índice utilizado para calcular la fecha de comienzo.
+     */
     @Override
     public void crearFechaDeComienzo(int index) {
         this.fechaComienzo = LocalDate.now().plusDays(index);
-        System.out.println("Fecha de comienzo creada: " + this.fechaComienzo);
     }
 
+    /**
+     * Calcula la fecha de expiración del contrato basándose en la duración en meses.
+     *
+     * @param index Índice utilizado para calcular la fecha de expiración.
+     */
     @Override
     public void crearFechaDeExpiracion(int index) {
         this.fechaExpiracion = this.fechaComienzo.plusMonths(index);
-        System.out.println("Fecha de expiración creada: " + this.fechaExpiracion);
     }
 
+    /**
+     * Establece el lugar de trabajo asociado al contrato.
+     *
+     * @param index Índice utilizado para diferenciar lugares de trabajo.
+     */
     @Override
     public void crearLugarDeTrabajo(int index) {
         this.lugarDeTrabajo = "Lugar de Trabajo #" + index;
-        System.out.println("Lugar de trabajo creado: " + this.lugarDeTrabajo);
     }
 
+    /**
+     * Establece la remuneración del contrato.
+     *
+     * @param index Índice utilizado para calcular el monto de la remuneración.
+     */
     @Override
     public void crearRemuneracion(int index) {
         this.remuneracion = index * 100000; // Ejemplo: remuneración basada en el índice
-        System.out.println("Remuneración creada: $" + this.remuneracion);
     }
 
+    /**
+     * Calcula y establece la fecha de pago del contrato.
+     *
+     * @param index Índice utilizado para calcular la fecha de pago.
+     */
     @Override
     public void crearFechaDePago(int index) {
         this.fechaDePago = this.fechaComienzo.plusDays(index);
-        System.out.println("Fecha de pago creada: " + this.fechaDePago);
     }
 
     // Getters
+
     public String getFirma() {
         return firma;
     }
