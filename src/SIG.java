@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class SIG {
@@ -58,8 +60,14 @@ public class SIG {
                     break;
 
                 case "logística":
+                    System.out.println("1. Ver equipos");
+                    System.out.println("2. Modificar personal del equipo");
+                    System.out.println("0. Salir");
+                    break;
+
                 case "producción":
                     System.out.println("1. Ver equipos");
+                    System.out.println("2. Registrar inversión en producción");
                     System.out.println("0. Salir");
                     break;
 
@@ -85,16 +93,20 @@ public class SIG {
             case "ejecutivo":
                 switch (opcion) {
                     case 1:
-                        System.out.println("Mostrando reporte financiero...");
-                        mclaren.calcularCostoTotalNomina();
+                        System.out.println("Saldo actual de McLaren: $" + mclaren.getSaldo());
                         break;
                     case 2:
-                        System.out.println("Mostrando detalle de equipos:");
+                        System.out.println("Equipos:");
                         mclaren.getEquipos().forEach(e -> System.out.println("- " + e.getNombre()));
                         break;
                     case 3:
-                        System.out.println("Mostrando detalle de patrocinios...");
-                        // Implementar lógica de detalle de patrocinios
+                        System.out.println("Patrocinios:");
+                        mclaren.getPatrocinadores().forEach(p -> {
+                            System.out.println("- Nombre: " + p.getNombre());
+                            System.out.println("  Fecha Inicio: " + p.getContrato().getFechaComienzo());
+                            System.out.println("  Fecha Fin: " + p.getContrato().getFechaExpiracion());
+                            System.out.println("  Monto: $" + p.getContrato().getRemuneracion());
+                        });
                         break;
                     case 0:
                         System.out.println("Saliendo del menú Ejecutivo...");
@@ -105,16 +117,15 @@ public class SIG {
             case "finanzas":
                 switch (opcion) {
                     case 1:
-                        System.out.println("Mostrando reporte financiero...");
-                        mclaren.calcularCostoTotalNomina();
+                        System.out.println("Saldo actual de McLaren: $" + mclaren.getSaldo());
                         break;
                     case 2:
-                        System.out.println("Registrando gasto...");
-                        // Implementar lógica para registrar gasto
+                        System.out.println("Seleccione un equipo:");
+                        listarEquipos(mclaren, scanner, "gasto");
                         break;
                     case 3:
-                        System.out.println("Registrando pago...");
-                        // Implementar lógica para registrar pago
+                        System.out.println("Seleccione un patrocinador:");
+                        listarPatrocinadores(mclaren, scanner);
                         break;
                     case 0:
                         System.out.println("Saliendo del menú Finanzas...");
@@ -123,15 +134,20 @@ public class SIG {
                 break;
 
             case "logística":
+                if (opcion == 1) {
+                    listarEquipos(mclaren, scanner, "modificar personal");
+                } else if (opcion == 0) {
+                    System.out.println("Saliendo del menú Logística...");
+                    return false;
+                }
+                break;
+
             case "producción":
                 if (opcion == 1) {
-                    System.out.println("Mostrando equipos:");
-                    mclaren.getEquipos().forEach(e -> System.out.println("- " + e.getNombre()));
+                    listarEquipos(mclaren, scanner, "registrar inversión");
                 } else if (opcion == 0) {
-                    System.out.println("Saliendo del menú " + usuario.getTipo() + "...");
+                    System.out.println("Saliendo del menú Producción...");
                     return false;
-                } else {
-                    System.out.println("Opción no válida.");
                 }
                 break;
 
@@ -141,5 +157,76 @@ public class SIG {
         }
 
         return true;
+    }
+
+    // Método para listar equipos y realizar acciones
+    private static void listarEquipos(McLaren mclaren, Scanner scanner, String accion) {
+        System.out.println("Seleccione un equipo:");
+        int index = 1;
+        for (Equipo equipo : mclaren.getEquipos()) {
+            System.out.println(index + ". " + equipo.getNombre());
+            index++;
+        }
+        System.out.print("Ingrese la opción del equipo: ");
+        int opcionEquipo = scanner.nextInt();
+        scanner.nextLine();
+
+        if (opcionEquipo > 0 && opcionEquipo <= mclaren.getEquipos().size()) {
+            Equipo equipoSeleccionado = mclaren.getEquipos().get(opcionEquipo - 1);
+            switch (accion) {
+                case "gasto":
+                    System.out.print("Ingrese la fecha (YYYY-MM-DD) del gasto: ");
+                    String fechaGasto = scanner.nextLine();
+                    mclaren.registrarGasto(equipoSeleccionado.getNombre(), LocalDate.parse(fechaGasto));
+                    break;
+                case "modificar personal":
+                    // Lógica para agregar o quitar personal del equipo
+                    break;
+                case "registrar inversión":
+                    System.out.print("Ingrese la fecha (YYYY-MM-DD) de la inversión: ");
+                    String fechaInversion = scanner.nextLine();
+                    try {
+                        LocalDate fechaInversionLocalDate = LocalDate.parse(fechaInversion);
+                        System.out.println("Fecha ingresada: " + fechaInversionLocalDate);
+                        mclaren.registrarGasto(equipoSeleccionado.getNombre(), fechaInversionLocalDate);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Error: La fecha ingresada no tiene el formato correcto (YYYY-MM-DD).");
+                    }
+                    break;
+            }
+        } else {
+            System.out.println("Opción de equipo no válida.");
+        }
+    }
+
+    // Método para listar patrocinadores
+    private static void listarPatrocinadores(McLaren mclaren, Scanner scanner) {
+        System.out.println("Seleccione un patrocinador:");
+        int index = 1;
+        for (Patrocinador patrocinador : mclaren.getPatrocinadores()) {
+            System.out.println(index + ". " + patrocinador.getNombre());
+            index++;
+        }
+        System.out.print("Ingrese la opción del patrocinador: ");
+        int opcionPatrocinador = scanner.nextInt();
+        scanner.nextLine();
+
+        if (opcionPatrocinador > 0 && opcionPatrocinador <= mclaren.getPatrocinadores().size()) {
+            Patrocinador patrocinadorSeleccionado = mclaren.getPatrocinadores().get(opcionPatrocinador - 1);
+            System.out.print("Ingrese la fecha (YYYY-MM-DD) del pago: ");
+            String fechaPago = scanner.nextLine();
+            try {
+                LocalDate fechaPagoLocalDate = LocalDate.parse(fechaPago);
+                System.out.println("Fecha ingresada: " + fechaPagoLocalDate);
+                System.out.print("Ingrese el monto del pago: ");
+                double montoPago = scanner.nextDouble();
+                scanner.nextLine();
+                mclaren.registrarPago(montoPago, patrocinadorSeleccionado.getNombre(),fechaPagoLocalDate);
+            } catch (DateTimeParseException e) {
+                System.out.println("Error: La fecha ingresada no tiene el formato correcto (YYYY-MM-DD).");
+            }
+        } else {
+            System.out.println("Opción de patrocinador no válida.");
+        }
     }
 }
