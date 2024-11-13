@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Clase Singleton que representa la gestión integral de McLaren.
+ * Incluye la gestión de equipos, usuarios, patrocinadores y finanzas.
+ */
 public class McLaren {
     private static McLaren instance; // Singleton Instance
     private String nombre;
@@ -11,7 +15,11 @@ public class McLaren {
     private List<Patrocinador> patrocinadores;
     private double saldo; // Saldo inicial de McLaren
 
-    // Constructor privado para Singleton
+    /**
+     * Constructor privado para Singleton.
+     *
+     * @param nombre Nombre de la organización McLaren.
+     */
     private McLaren(String nombre) {
         this.nombre = nombre;
         this.equipos = new ArrayList<>();
@@ -32,7 +40,12 @@ public class McLaren {
         inicializarPatrocinadores();
     }
 
-    // Método estático para obtener la instancia única
+    /**
+     * Método estático para obtener la instancia única.
+     *
+     * @param nombre Nombre de la organización McLaren.
+     * @return Instancia única de McLaren.
+     */
     public static McLaren getInstance(String nombre) {
         if (instance == null) {
             instance = new McLaren(nombre);
@@ -40,7 +53,9 @@ public class McLaren {
         return instance;
     }
 
-    // Método para inicializar los equipos
+    /**
+     * Método para inicializar los equipos.
+     */
     private void inicializarEquipos() {
         RolesFactory rolesFactory = new RolesFactory();
 
@@ -52,7 +67,9 @@ public class McLaren {
         agregarEquipo(crearEquipo("GT", rolesFactory));
     }
 
-    // Método para inicializar patrocinadores
+    /**
+     * Método para inicializar patrocinadores.
+     */
     private void inicializarPatrocinadores() {
         Random random = new Random();
         for (int i = 1; i <= 15; i++) {
@@ -78,7 +95,13 @@ public class McLaren {
         }
     }
 
-    // Método para crear un equipo con roles iniciales
+    /**
+     * Método para crear un equipo con roles iniciales.
+     *
+     * @param nombreEquipo Nombre del equipo.
+     * @param rolesFactory Fábrica de roles.
+     * @return Equipo inicializado.
+     */
     private Equipo crearEquipo(String nombreEquipo, RolesFactory rolesFactory) {
         Equipo equipo = new Equipo(nombreEquipo);
 
@@ -102,7 +125,11 @@ public class McLaren {
         return equipo;
     }
 
-    // Método para agregar equipos
+    /**
+     * Método para agregar equipos.
+     *
+     * @param equipo Equipo a agregar.
+     */
     public void agregarEquipo(Equipo equipo) {
         if (!equipos.contains(equipo)) {
             equipos.add(equipo);
@@ -111,12 +138,22 @@ public class McLaren {
         }
     }
 
-    // Método para agregar usuarios
+    /**
+     * Método para agregar usuarios.
+     *
+     * @param usuario Usuario a agregar.
+     */
     public void agregarUsuario(Usuario usuario) {
         usuarios.add(usuario);
     }
 
-    // Método para verificar login de un usuario
+    /**
+     * Método para verificar login de un usuario.
+     *
+     * @param nombre   Nombre del usuario.
+     * @param password Contraseña del usuario.
+     * @return true si las credenciales son correctas, false en caso contrario.
+     */
     public boolean verificarLogin(String nombre, String password) {
         for (Usuario usuario : usuarios) {
             if (usuario.getNombre().equals(nombre) && usuario.getPassword().equals(password)) {
@@ -128,7 +165,11 @@ public class McLaren {
         return false;
     }
 
-    // Método para calcular el costo total de nómina
+    /**
+     * Método para calcular el costo total de nómina.
+     *
+     * @return Costo total de nómina para todos los equipos.
+     */
     public double calcularCostoTotalNomina() {
         double costoTotal = 0;
         for (Equipo equipo : equipos) {
@@ -138,19 +179,36 @@ public class McLaren {
         return costoTotal;
     }
 
-    // Método para agregar patrocinadores
+    /**
+     * Método para agregar patrocinadores.
+     *
+     * @param nombre       Nombre del patrocinador.
+     * @param fechaInicio  Fecha de inicio del contrato.
+     * @param fechaFin     Fecha de fin del contrato.
+     */
     public void agregarPatrocinador(String nombre, LocalDate fechaInicio, LocalDate fechaFin) {
         patrocinadores.add(new Patrocinador(nombre, fechaInicio, fechaFin));
         System.out.println("Patrocinador " + nombre + " agregado con contrato desde " + fechaInicio + " hasta " + fechaFin + ".");
     }
 
-    // Método para registrar un pago
+    /**
+     * Método para registrar un pago.
+     *
+     * @param monto        Monto del pago.
+     * @param patrocinador Nombre del patrocinador.
+     * @param fecha        Fecha del pago.
+     */
     public void registrarPago(double monto, String patrocinador, LocalDate fecha) {
         saldo += monto;
         System.out.println("Pago registrado de patrocinador " + patrocinador + " por $" + monto + " en la fecha " + fecha + ".");
     }
 
-    // Método para registrar un gasto
+    /**
+     * Método para registrar un gasto.
+     *
+     * @param equipoNombre Nombre del equipo que genera el gasto.
+     * @param fecha        Fecha del gasto.
+     */
     public void registrarGasto(String equipoNombre, LocalDate fecha) {
         Equipo equipo = equipos.stream()
                 .filter(e -> e.getNombre().equals(equipoNombre))
@@ -170,23 +228,47 @@ public class McLaren {
         }
     }
 
+    /**
+     * Obtener la lista de patrocinadores.
+     *
+     * @return Lista de patrocinadores.
+     */
     public List<Patrocinador> getPatrocinadores() {
         return patrocinadores;
     }
 
-    // Getters
+    /**
+     * Obtener el nombre de McLaren.
+     *
+     * @return Nombre de McLaren.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Obtener el nombre del equipo
+     *
+     * @return Nombre del equipo
+     */
     public List<Equipo> getEquipos() {
         return equipos;
     }
 
+    /**
+     * Obtener el nombre de los usuarios
+     *
+     * @return Nombre de los usuarios
+     */
     public List<Usuario> getUsuarios() {
         return usuarios;
     }
 
+    /**
+     * Obtener el saldo
+     *
+     * @return El Saldo
+     */
     public double getSaldo() {
         return saldo;
     }
