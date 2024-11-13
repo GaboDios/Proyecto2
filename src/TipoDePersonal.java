@@ -3,8 +3,6 @@ public interface TipoDePersonal {
     void crearIdentificador(int index);
     void crearUsuario(int index);
     void crearSueldo(int index);
-    void crearGPU(int index);
-    void crearMotherboard(int index);
 
     // Métodos para el patrón Composite
     default void agregar(TipoDePersonal personal) {

@@ -32,17 +32,6 @@ public abstract class BaseTipoDePersonal implements TipoDePersonal {
         System.out.println("Estableciendo sueldo para el personal: $" + sueldo);
     }
 
-    @Override
-    public void crearGPU(int index) {
-        System.out.println("Asignando GPU para el personal en el equipo " + equipo);
-    }
-
-    @Override
-    public void crearMotherboard(int index) {
-        System.out.println("Asignando motherboard para el personal en el equipo " + equipo);
-    }
-
-
     public double getSueldo(){
         return sueldo;
     }

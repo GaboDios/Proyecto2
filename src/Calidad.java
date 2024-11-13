@@ -24,13 +24,5 @@ public class Calidad extends BaseTipoDePersonal {
         System.out.println("Creando sueldo " + index + " para personal de Calidad.");
     }
 
-    @Override
-    public void crearGPU(int index) {
-        System.out.println("Creando GPU " + index + " para personal de Calidad.");
-    }
 
-    @Override
-    public void crearMotherboard(int index) {
-        System.out.println("Creando motherboard " + index + " para personal de Calidad.");
-    }
 }

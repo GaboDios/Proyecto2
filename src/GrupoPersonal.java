@@ -38,20 +38,6 @@ public class GrupoPersonal implements TipoDePersonal {
         }
     }
 
-    @Override
-    public void crearGPU(int index) {
-        for (TipoDePersonal miembro : miembros) {
-            miembro.crearGPU(index);
-        }
-    }
-
-    @Override
-    public void crearMotherboard(int index) {
-        for (TipoDePersonal miembro : miembros) {
-            miembro.crearMotherboard(index);
-        }
-    }
-
     // Métodos específicos para gestionar la jerarquía
     @Override
     public void agregar(TipoDePersonal personal) {

@@ -5,10 +5,7 @@ public class JefeDeEquipo extends BaseTipoDePersonal {
     private String equipo;
 
     public JefeDeEquipo(String nombre, String identificador, double sueldo, String equipo) {
-        this.nombre = nombre;
-        this.identificador = identificador;
-        this.sueldo = sueldo;
-        this.equipo = equipo;
+        super(nombre, identificador, sueldo, equipo); // Llama al constructor de la clase base
     }
 
     @Override
@@ -31,15 +28,6 @@ public class JefeDeEquipo extends BaseTipoDePersonal {
         System.out.println("Estableciendo sueldo para el Jefe de Equipo: $" + sueldo);
     }
 
-    @Override
-    public void crearGPU(int index) {
-        System.out.println("Asignando GPU al Jefe de Equipo");
-    }
-
-    @Override
-    public void crearMotherboard(int index) {
-        System.out.println("Asignando motherboard al Jefe de Equipo");
-    }
 
     // Método adicional específico del Jefe de Equipo
     public void planificarEstrategia() {
